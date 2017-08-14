@@ -1,5 +1,9 @@
+import sys
 import re
-import itertools
+if sys.version_info[0] > 2:
+    from itertools import zip_longest
+else:
+    from itertools import izip_longest as zip_longest
 
 
 class _Comparable(object):
@@ -28,7 +32,7 @@ class _Seq(_Comparable):
 
     def __lt__(self, other):
         assert set([int, str]) >= set(map(type, self.seq))
-        for s, o in itertools.zip_longest(self.seq, other.seq):
+        for s, o in zip_longest(self.seq, other.seq):
             assert not (s is None and o is None)
             if s is None or o is None:
                 return s is None
@@ -83,7 +87,7 @@ class Version(_Comparable):
     def __init__(self, version):
         m = _re.match(version)
         if not m:
-            raise VersionError(f'Version malformed: {version}')
+            raise VersionError('Version malformed: {}'.format(version))
         self.major, self.minor, self.patch = map(int, m.groups(0)[:3])
         self.pre_release = _make_group(m.group(4))
         self.build = _make_group(m.group(5))
@@ -127,4 +131,4 @@ class Version(_Comparable):
         return s
 
     def __repr__(self):
-        return f'{self.__class__.__name__}({self.__str__()})'
+        return '{}({})'.format(self.__class__.__name__, self.__str__())

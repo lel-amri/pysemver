@@ -4,7 +4,7 @@ Python implementation of SemVer 2.0.0
 Compatibility and dependencies
 ------------------------------
 
-Compatible with Python >= 3.6
+Compatible with Python 2.7 and 3.x
 
 No dependencies required
 
@@ -52,6 +52,5 @@ Usage
 Notes
 -----
 
-No CPython magic (ie. ``['a', 'b', 'c'] == ['a', 'b', 'c']``) is used. Since
-the code is not compatible with Python < 3.6, it should at least be compatible
-with any Python >= 3.6 implementation.
+No CPython magic (ie. ``['a', 'b', 'c'] == ['a', 'b', 'c']``) is used. It
+should make the code compatible with any Python implementation.
