@@ -17,7 +17,7 @@ class _Seq(_Comparable):
 
     def __eq__(self, other):
         assert set([int, str]) >= set(map(type, self.seq))
-        if len(self) != len(other):
+        if len(self.seq) != len(other.seq):
             return False
         for s, o in zip(self.seq, other.seq):
             if not (type(s) is type(o)):
@@ -33,10 +33,10 @@ class _Seq(_Comparable):
             if s is None or o is None:
                 return s is None
             elif type(s) is int and type(o) is int:
-                if s < o:
-                    return True
+                if s != o:
+                    return s < o
             elif type(s) is int or type(o) is int:
-                return s is int
+                return type(s) is int
             elif s < o:
                 return True
         return False
@@ -88,6 +88,9 @@ class Version(_Comparable):
         self.pre_release = _make_group(m.group(4))
         self.build = _make_group(m.group(5))
 
+    def _mmp(self):
+        return [self.major, self.minor, self.patch]
+
     def __eq__(self, other):
         if not isinstance(other, Version):
             return NotImplemented
@@ -97,16 +100,16 @@ class Version(_Comparable):
             return False
         return True
 
-    def __lt__(self, o):
+    def __lt__(self, other):
         if not isinstance(other, Version):
             return NotImplemented
         if _Seq(self._mmp()) == _Seq(other._mmp()):
             if self.pre_release and other.pre_release:
                 return _Seq(self.pre_release) < _Seq(other.pre_release)
-            elif self.pre_release is None and other.pre_release is None:
+            elif (not self.pre_release) and (not other.pre_release):
                 return False
             return not self.pre_release is None
-        return _Seq(self._mmp()) < _Seq(self._mmp())
+        return _Seq(self._mmp()) < _Seq(other._mmp())
 
     def __str__(self):
         """Returns a version as string
@@ -116,7 +119,7 @@ class Version(_Comparable):
         :returns: the version stored
         :rtype: string
         """
-        s = f'{self.major}.{self.minor}.{self.patch}'
+        s = '.'.join(str(p) for p in self._mmp())
         if self.pre_release:
             s += '-{}'.format('.'.join(str(p) for p in self.pre_release))
         if self.build:
