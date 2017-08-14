@@ -80,7 +80,7 @@ class Version(_Comparable):
     It gives the ability to easily compare versions and parse them.
     
     While the object is flexible for the parsing of its input, it strictly
-    respect the SemVer specification.
+    respect the SemVer specification for the output.
     
     .. _SemVer 2.0.0: http://semver.org/spec/v2.0.0.html
     """
@@ -110,9 +110,9 @@ class Version(_Comparable):
         if _Seq(self._mmp()) == _Seq(other._mmp()):
             if self.pre_release and other.pre_release:
                 return _Seq(self.pre_release) < _Seq(other.pre_release)
-            elif (not self.pre_release) and (not other.pre_release):
-                return False
-            return not self.pre_release is None
+            elif self.pre_release or other.pre_release:
+                return bool(self.pre_release)
+            return False
         return _Seq(self._mmp()) < _Seq(other._mmp())
 
     def __str__(self):

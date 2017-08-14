@@ -49,6 +49,14 @@ Usage
     >>> v.build
     [3, 1415]
 
+.. code:: python
+
+    >>> from version import Version
+    >>> Version('1') < Version('2')
+    True
+    >>> Version('3.14') < Version('3.14-rc2')
+    False
+
 Notes
 -----
 
