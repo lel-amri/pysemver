@@ -66,13 +66,11 @@ class TestVersion(unittest.TestCase):
     def test_comparison_complex(self):
         v = Version
         self.assertTrue(v('3.14.15-alpha.42') < v('3.14.15-beta.42'))
-        self.assertFalse(v('3.14.15-alpha.42') > v('3.14.15-beta.42'))
+        self.assertFalse(v('3.14.15-beta.42') < v('3.14.15-alpha.42'))
         self.assertTrue(v('3.14.15-42') < v('3.14.15-alpha'))
-        self.assertFalse(v('3.14.15-42') > v('3.14.15-alpha'))
+        self.assertFalse(v('3.14.15-alpha') < v('3.14.15-42'))
         self.assertTrue(v('3.14.15-rc3') < v('3.14.15'))
-        self.assertFalse(v('3.14.15-rc3') > v('3.14.15'))
         self.assertFalse(v('3.14.15') < v('3.14.15-rc3'))
-        self.assertTrue(v('3.14.15') > v('3.14.15-rc3'))
 
     def test_comparison_special(self):
         v = Version
