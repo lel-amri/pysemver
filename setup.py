@@ -6,5 +6,6 @@ setup(
     author='Leo El Amri',
     author_email='leo.el.amri@gmail.com',
     py_modules=['version'],
-    license='MIT'
+    license='MIT',
+    test_suite='tests'
 )
