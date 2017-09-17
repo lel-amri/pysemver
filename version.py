@@ -131,4 +131,4 @@ class Version(_Comparable):
         return s
 
     def __repr__(self):
-        return '{}({})'.format(self.__class__.__name__, self.__str__())
+        return '{!s}({!r})'.format(self.__class__.__name__, self.__str__())

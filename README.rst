@@ -16,7 +16,7 @@ Usage
     >>> from version import Version
     >>> v = Version('3.14.15')
     >>> v
-    Version(3.14.15)
+    Version('3.14.15')
     >>> str(v)
     '3.14.15'
     >>> v.major
@@ -35,7 +35,7 @@ Usage
     >>> from version import Version
     >>> v = Version('4.2-1337.pi+3.1415')
     >>> v
-    Version(4.2.0-1337.pi+3.1415)
+    Version('4.2.0-1337.pi+3.1415')
     >>> str(v)
     '4.2.0-1337.pi+3.1415'
     >>> v.major
