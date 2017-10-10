@@ -1,5 +1,5 @@
 import unittest
-from version import Version, VersionError
+from pysemver import Version, VersionError
 
 
 class TestVersion(unittest.TestCase):

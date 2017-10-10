@@ -13,7 +13,7 @@ Usage
 
 .. code:: python
 
-    >>> from version import Version
+    >>> from pysemver import Version
     >>> v = Version('3.14.15')
     >>> v
     Version('3.14.15')
@@ -32,7 +32,7 @@ Usage
 
 .. code:: python
 
-    >>> from version import Version
+    >>> from pysemver import Version
     >>> v = Version('4.2-1337.pi+3.1415')
     >>> v
     Version('4.2.0-1337.pi+3.1415')
@@ -51,7 +51,7 @@ Usage
 
 .. code:: python
 
-    >>> from version import Version
+    >>> from pysemver import Version
     >>> Version('1') < Version('2')
     True
     >>> Version('3.14') < Version('3.14-rc2')
